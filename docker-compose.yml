@@ -1,0 +1,23 @@
+version: "3.8"
+services:
+  mc-apache:
+    image: httpd:buster
+    build:
+      context: './apache/'
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./www/:/var/www/html
+    container_name: mc-apache
+  mc-java:
+    image: openjdk:18-jdk-bullseye
+    build:
+      context: './java/'
+    ports:
+      - "25565:25565"
+    volumes:
+      - ./minecraft:/srv/minecraft
+volumes:
+  www:
+  minecraft:
